@@ -1,0 +1,19 @@
+{
+    "name": "xandro2021/app-salon_php_mvc_js_sass",
+    "description": "Proyecto PHP 8, MVC, SQL, SASS, Gulp",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MVC\\": "./",
+            "Controllers\\": "./controllers",
+            "Model\\": "./models"
+        }
+    },
+    "authors": [
+        {
+            "name": "xandro2021",
+            "email": "xandrocastro2021@gmail.com"
+        }
+    ],
+    "require": {}
+}
