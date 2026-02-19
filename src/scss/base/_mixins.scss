@@ -1,3 +1,4 @@
+@use "sass:color";
 @use 'variables' as v;
 
 /** Media Queries **/
@@ -39,7 +40,7 @@
         width: auto;
     }
     &:hover {
-        background-color: darken( $bgColor, 10% );
+        background-color: color.adjust($bgColor, $lightness: -15%);
         cursor: pointer;
     }
 }

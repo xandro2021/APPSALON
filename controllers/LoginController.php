@@ -18,9 +18,11 @@ class LoginController
         debuguear('LOGOUT');
     }
 
-    public static function olvide()
+    public static function olvide(Router $router)
     {
-        debuguear('OOOOLVIDE!!!');
+        $router->render('auth/olvide-password', [
+
+        ]);
     }
 
     public static function recuperar()
@@ -28,8 +30,10 @@ class LoginController
         debuguear('RECUPERAR');
     }
 
-    public static function crear()
+    public static function crear(Router $router)
     {
-        debuguear('CREAR!!!!');
+        $router->render('auth/crear-cuenta', [
+
+        ]);
     }
 }
