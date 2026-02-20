@@ -1,0 +1,44 @@
+CREATE DATABASE IF NOT EXISTS appsalon;
+
+USE appsalon;
+
+CREATE TABLE IF NOT EXISTS usuarios (
+	id INT(12) NOT NULL  PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(60),
+	apellido VARCHAR(60),
+	email VARCHAR(30),
+	password VARCHAR(60) NOT NULL,
+	telefono VARCHAR(10),
+	admin TINYINT(1),
+	confirmado TINYINT(1),
+	token VARCHAR(15)
+);
+
+CREATE TABLE IF NOT EXISTS servicios (
+	id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(60),
+	precio DECIMAL(5,2)
+);
+
+CREATE TABLE IF NOT EXISTS citas (
+	id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	fecha DATE,
+	hora TIME,
+	usuarioId INT(12),
+	CONSTRAINT fk_usuarios_citas
+	FOREIGN KEY (usuarioId) REFERENCES usuarios (id)
+	ON UPDATE SET NULL ON DELETE SET NULL 
+);
+
+
+CREATE TABLE IF NOT EXISTS citasServicios (
+	id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	citaId INT(12),
+	servicioId INT(12),
+	CONSTRAINT fk_Cita_citasServicios
+	FOREIGN KEY (citaId) REFERENCES citas (id)
+	ON UPDATE SET NULL ON DELETE SET NULL,
+	CONSTRAINT fk_Servicio_citasServicios
+	FOREIGN KEY (servicioId) REFERENCES servicios (id)
+	ON UPDATE SET NULL ON DELETE SET NULL
+);
