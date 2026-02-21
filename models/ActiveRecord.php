@@ -44,7 +44,10 @@ class ActiveRecord
     }
 
     // Consulta SQL para crear un objeto en Memoria
-    public static function consultarSQL($query)
+    /**
+     * @return static[]
+     */
+    public static function consultarSQL($query): array
     {
         // Consultar la base de datos
         $resultado = self::$db->query($query);
@@ -63,7 +66,10 @@ class ActiveRecord
     }
 
     // Crea el objeto en memoria que es igual al de la BD
-    protected static function crearObjeto($registro)
+    /**
+     * @return static
+     */
+    protected static function crearObjeto($registro): static
     {
         $objeto = new static;
 
@@ -77,7 +83,10 @@ class ActiveRecord
     }
 
     // Identificar y unir los atributos de la BD
-    public function atributos()
+    /**
+     * @return array<string, mixed>
+     */
+    public function atributos(): array
     {
         $atributos = [];
         foreach (static::$columnasDB as $columna) {
@@ -88,7 +97,10 @@ class ActiveRecord
     }
 
     // Sanitizar los datos antes de guardarlos en la BD
-    public function sanitizarAtributos()
+    /**
+     * @return array<string, string>
+     */
+    public function sanitizarAtributos(): array
     {
         $atributos = $this->atributos();
         $sanitizado = [];
@@ -123,7 +135,10 @@ class ActiveRecord
     }
 
     // Todos los registros
-    public static function all()
+    /**
+     * @return static[]
+     */
+    public static function all(): array
     {
         $query = "SELECT * FROM " . static::$tabla;
         $resultado = self::consultarSQL($query);
@@ -131,7 +146,10 @@ class ActiveRecord
     }
 
     // Busca un registro por su id
-    public static function find($id)
+    /**
+     * @return static|null
+     */
+    public static function find($id): static | null
     {
         $query = "SELECT * FROM " . static::$tabla  . " WHERE id = {$id}";
         $resultado = self::consultarSQL($query);
@@ -139,9 +157,22 @@ class ActiveRecord
     }
 
     // Obtener Registros con cierta cantidad
-    public static function get($limite)
+    /**
+     * @return static[]
+     */
+    public static function get($limite): array
     {
         $query = "SELECT * FROM " . static::$tabla . " LIMIT {$limite}";
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
+    /**
+     * @return static|null
+     */
+    public static function where($columna, $valor): static | null
+    {
+        $query = "SELECT * FROM " . static::$tabla  . " WHERE {$columna} = '$valor'";
         $resultado = self::consultarSQL($query);
         return array_shift($resultado);
     }
@@ -153,11 +184,11 @@ class ActiveRecord
         $atributos = $this->sanitizarAtributos();
 
         // Insertar en la base de datos
-        $query = " INSERT INTO " . static::$tabla . " ( ";
+        $query = " INSERT INTO " . static::$tabla . "(";
         $query .= join(', ', array_keys($atributos));
-        $query .= " ) VALUES (' ";
+        $query .= ") VALUES ('";
         $query .= join("', '", array_values($atributos));
-        $query .= " ') ";
+        $query .= "')";
 
         // Resultado de la consulta
         $resultado = self::$db->query($query);
