@@ -19,8 +19,8 @@ class Usuario extends ActiveRecord
         $this->email = $args['email'] ?? '';
         $this->password = $args['password'] ?? '';
         $this->telefono = $args['telefono'] ?? '';
-        $this->admin = $args['admin'] ?? null;
-        $this->confirmado = $args['confirmado'] ?? null;
+        $this->admin = $args['admin'] ?? 0;
+        $this->confirmado = $args['confirmado'] ?? 0;
         $this->token = $args['token'] ?? '';
     }
 
@@ -67,5 +67,10 @@ class Usuario extends ActiveRecord
     public function hashPassword()
     {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
+    }
+
+    public function crearToken()
+    {
+        $this->token = uniqid();
     }
 }
