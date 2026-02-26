@@ -23,24 +23,24 @@
 
             <div class="campo">
                 <label for="nombre"> Nombre </label>
-                <input type="text" name="nombre" placeholder="Tu nombre" value="<?= $nombre ?>" disabled />
+                <input id="nombre" type="text" name="nombre" placeholder="Tu nombre" value="<?= $nombre ?>" disabled />
             </div>
 
             <div class="campo">
                 <label for="fecha"> Fecha </label>
-                <input type="date" name="fecha" placeholder="Tu fecha" />
+                <input id="fecha" type="date" name="fecha" placeholder="Tu fecha" min="<?= date('Y-m-d', strtotime('+1 day')) ?>" />
             </div>
 
             <div class="campo">
                 <label for="hora"> Hora </label>
-                <input type="time" name="hora" placeholder="Tu hora" />
+                <input id="hora" type="time" name="hora" placeholder="Tu hora" />
             </div>
 
         </form>
 
     </div>
 
-    <div id="paso-3" class="seccion">
+    <div id="paso-3" class="seccion contenido-resumen">
         <h2>Resumen</h2>
         <p class="text-center">Verifica que la información sea correcta</p>
     </div>
