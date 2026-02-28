@@ -177,6 +177,16 @@ class ActiveRecord
         return array_shift($resultado);
     }
 
+    // Consulta generica de SQL - UNION de tablas
+    /**
+     * @return static[]|null
+     */
+    public static function SQL(string $query): array | null
+    {
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
     // crea un nuevo registro
     public function crear()
     {
@@ -189,6 +199,9 @@ class ActiveRecord
         $query .= ") VALUES ('";
         $query .= join("', '", array_values($atributos));
         $query .= "')";
+
+        /* CODIGO PARA DEBUGUEAR LA CONSULTA DESDE POSTMAN O API Cuando Backend y Front end estan separados */
+        /* return json_encode(['query' => $query]); */
 
         // Resultado de la consulta
         $resultado = self::$db->query($query);
