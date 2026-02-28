@@ -25,3 +25,19 @@
         padding: 3rem 0px;
     }
 }
+
+.barra {
+    width: 95%;
+    margin: v.$separacion auto;
+
+    @include m.tablet {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .boton {
+        @include m.boton(v.$negro, v.$blanco);
+        margin: 0;
+    }
+}
