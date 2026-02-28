@@ -38,6 +38,8 @@
                 <input id="hora" type="time" name="hora" placeholder="Tu hora" />
             </div>
 
+            <input type="hidden" id="id" value="<?= $id ?>" />
+
         </form>
 
     </div>
