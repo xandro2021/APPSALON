@@ -55,5 +55,8 @@
 </div>
 
 <?php
-$script = "<script type='text/javascript' src='build/js/bundle.min.js'></script>";
+$script = "
+<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+<script type='text/javascript' src='build/js/bundle.min.js'></script>
+";
 ?>
