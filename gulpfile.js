@@ -36,26 +36,25 @@ export function css() {
 
 // Minificar JS
 // export function js() {
-//   return src(paths.js)
+//   return src([
+//     "src/js/modernizr.js",
+//     "src/js/**/*.js"
+//   ])
+//     .pipe(concat("bundle.js"))
 //     .pipe(terser())
 //     .pipe(rename({ suffix: ".min" }))
-//     .pipe(dest("build/js", { sourcemaps: "." }));
+//     .pipe(dest("./public/build/js", { sourcemaps: "." }));
 // }
+
 export function js() {
-  return src([
-    "src/js/modernizr.js",
-    "src/js/**/*.js"
-  ])
-    .pipe(concat("bundle.js"))
+  return src("src/js/*.js")                     // todos los .js sueltos
     .pipe(terser())
-    .pipe(rename({ suffix: ".min" }))
     .pipe(dest("./public/build/js", { sourcemaps: "." }));
 }
 
 export async function imagenes(done) {
   const srcDir = './src/img';
   const buildDir = './public/build/img';
-  // const images =  await glob('./src/img/**/*{jpg,png}')
   const images = await glob('./src/img/**/*')
 
   images.forEach(file => {

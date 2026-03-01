@@ -9,11 +9,17 @@
 
         <div class="campo">
             <label for="fecha">Fecha</label>
-            <input type="date" name="fecha" id="fecha" />
+            <input type="date" name="fecha" id="fecha" value="<?= $fecha ?>" />
         </div>
 
     </form>
 </div>
+
+<?php
+if (count($citas) === 0) {
+    echo "<h2>No hay citas en esta fecha</h2>";
+}
+?>
 
 <div class="citas-admin">
     <ul class="citas">
@@ -41,17 +47,29 @@
                 <p class="servicio"> <?= $cita->servicio . " " . $cita->precio ?> </p>
 
                 <?php
-                    $total += $cita->precio;
+                $total += $cita->precio;
 
-                    $actual = $cita->id;
-                    $proximo = $citas[$key + 1]->id ?? 0;
+                $actual = $cita->id;
+                $proximo = $citas[$key + 1]->id ?? 0;
                 ?>
 
                 <?php if (esUltimo($actual, $proximo)): ?>
                     <p class="total">Total: <span>$ <?= $total ?></span> </p>
+                    <form method="POST" action="/api/eliminar">
+                        <input type="hidden" name="id" value="<?= $cita->id ?>" />
+                        <input type="submit" class="boton-eliminar" value="Eliminar" />
+                    </form>
                 </li>
                 <?php endif; ?>
 
         <?php endforeach; ?>
     </ul>
 </div>
+
+<?php
+$script = "
+<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+<script type='text/javascript' src='build/js/modernizr.js'></script>
+<script type='text/javascript' src='build/js/buscador.js'></script>
+";
+?>
