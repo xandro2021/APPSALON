@@ -100,3 +100,5 @@ export function dev() {
 // Tareas disponibles
 export const build = series(parallel(css, js, imagenes));
 export default series(build, dev);
+// exports.default = parallel(css, js, imagenes, dev);
+// exports.build = parallel(css, js, imagenes);
